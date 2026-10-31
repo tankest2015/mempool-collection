@@ -1,0 +1,22 @@
+# /etc/systemd/system/mempool-collector.service
+[Unit]
+Description=Mempool collector (raccolta pending tx -> CSV)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=mempool
+WorkingDirectory=/opt/mempool-collector
+EnvironmentFile=/opt/mempool-collector/.env
+ExecStart=/opt/mempool-collector/.venv/bin/python collector.py
+Restart=always
+RestartSec=10
+# SIGTERM = spegnimento pulito (recupero finale dei blocchi, riepilogo): gli si lascia il tempo
+KillSignal=SIGTERM
+TimeoutStopSec=120
+Nice=5
+
+[Install]
+WantedBy=multi-user.target

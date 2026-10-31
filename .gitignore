@@ -1,0 +1,15 @@
+# dati e segreti: non vanno mai in Git
+.env
+spool/
+spool_*/
+runs/
+*.csv
+*.csv.gz
+*.jsonl
+data.json
+recheck.json
+truth.json
+rejected/
+__pycache__/
+*.pyc
+.venv/
